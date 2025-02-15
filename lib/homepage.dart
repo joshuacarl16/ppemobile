@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/livecam.dart';
 import 'package:flutter_application_1/registerpage.dart';
+import 'package:flutter_application_1/complianceReports.dart';
+import 'package:flutter_application_1/reportsHistory.dart';
+import 'package:flutter_application_1/devicelist.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,25 +20,23 @@ class _HomePageState extends State<HomePage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
-            title: Text(
+            title: const Text(
               'Welcome, ' + 'Neil' + '\nAdministrator User',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             backgroundColor: Colors.grey[400],
             actions: [
               IconButton(
-                icon: Icon(
-                    Icons.notifications_none), // Add your desired icon here
+                icon: const Icon(
+                    Icons.notifications_none), // Icon here
                 onPressed: () {
-                  // Add functionality for the icon button
                   print('Notifications icon tapped');
                 },
               ),
               IconButton(
                 icon:
-                    Icon(Icons.settings_outlined), // Add your desired icon here
+                    const Icon(Icons.settings_outlined), // Icon here
                 onPressed: () {
-                  // Add functionality for the icon button
                   print('Settings icon tapped');
                 },
               ),
@@ -60,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                       height: 130,
                       width: 250,
                       color: Colors.grey[400],
-                      child: Column(
+                      child: const Column(
                         children: [
                           Icon(
                             Icons.photo_camera_front,
@@ -72,20 +73,26 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.bold, fontSize: 18),
                           ),
                         ],
+                        
                       ),
+                      
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
-                      // Add functionality for the icon button
-                      print('Reports tapped');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ComplianceReportsScreen(),
+                        ),
+                      );
                     },
                     child: Container(
                       height: 130,
                       width: 250,
                       color: Colors.grey[400],
-                      child: Column(
+                      child: const Column(
                         children: [
                           Icon(
                             Icons.note_alt_outlined,
@@ -100,17 +107,21 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
-                      // Add functionality for the icon button
-                      print('History tapped');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HistorScreen(),
+                        ),
+                      );
                     },
                     child: Container(
                       height: 130,
                       width: 250,
                       color: Colors.grey[400],
-                      child: Column(
+                      child: const Column(
                         children: [
                           Icon(
                             Icons.history,
@@ -125,17 +136,21 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
-                      // Add functionality for the icon button
-                      print('Accounts tapped');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DeviceListPage(),
+                        ),
+                      );
                     },
                     child: Container(
                       height: 130,
                       width: 250,
                       color: Colors.grey[400],
-                      child: Column(
+                      child: const Column(
                         children: [
                           Icon(
                             Icons.account_circle_outlined,

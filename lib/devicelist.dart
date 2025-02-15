@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/registerpage.dart';
 
 class DeviceListPage extends StatefulWidget {
   const DeviceListPage({super.key});
@@ -11,123 +10,94 @@ class DeviceListPage extends StatefulWidget {
 class _DeviceListPageState extends State<DeviceListPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'DEVICE LIST',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          backgroundColor: Colors.grey[400],
-          actions: [
-            IconButton(
-              icon:
-                  Icon(Icons.notifications_none), // Add your desired icon here
-              onPressed: () {
-                // Add functionality for the icon button
-                print('Notifications icon tapped');
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.settings_outlined), // Add your desired icon here
-              onPressed: () {
-                // Add functionality for the icon button
-                print('Settings icon tapped');
-              },
-            ),
-          ],
+    return Scaffold(
+      backgroundColor: Colors.blueGrey[200],
+      appBar: AppBar(
+        title: const Text(
+          'Device List',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
-        backgroundColor: Colors.blueGrey[300],
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        backgroundColor: Colors.grey[300],
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications_none, color: Colors.black),
+            onPressed: () {
+              print('Notifications icon tapped');
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings_outlined, color: Colors.black),
+            onPressed: () {
+              print('Settings icon tapped');
+            },
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
           children: [
-            // Back Button
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            // Top Section (Back Button & QR Code Button)
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey[300],
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // Back Button
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context); // Navigate to the previous screen
+                      Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey[500],
+                      backgroundColor: Colors.grey[400],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
+                      padding: const EdgeInsets.all(8),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 2.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.arrow_back_ios_new, color: Colors.black),
-                          SizedBox(width: 5),
-                          Text(
-                            'Back',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
-                          ),
-                        ],
-                      ),
-                    ),
+                    child: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
                   ),
+
+                  // Show Register QR Code Button
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context); // Navigate to the previous screen
+                      print("Show QR Code Button Pressed");
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey[500],
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(8),
                       ),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(width: 5),
-                          Text(
-                            'Show Register QR Code',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
-                          ),
-                        ],
-                      ),
+                    child: const Text(
+                      'Show register QR Code',
+                      style: TextStyle(fontSize: 14, color: Colors.black),
                     ),
                   ),
                 ],
               ),
             ),
+            const SizedBox(height: 10),
+
+            // Device List Container
             Expanded(
-              child: Center(
-                child: Container(
-                  width: 360,
-                  height: 500,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Column(
-                      children: [
-                        _buildListItem(
-                            "New Device", "User name", "Device name"),
-                        _buildListItem(
-                            "Registered Device", "User name", "Device name"),
-                        _buildListItem(
-                            "New Device", "User name", "Device name"),
-                        _buildListItem(
-                            "Registered Device", "User name", "Device name"),
-                        _buildListItem(
-                            "Registered Device", "User name", "Device name"),
-                      ],
-                    ),
-                  ),
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.grey[400],
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: ListView(
+                  children: [
+                    _buildDeviceCard("New Device", "User Name", "Device Name", true),
+                    _buildDeviceCard("Registered Device", "User Name", "Device Name", false),
+                  ],
                 ),
               ),
             ),
@@ -137,52 +107,53 @@ class _DeviceListPageState extends State<DeviceListPage> {
     );
   }
 
-  // A function to generate the list item box
-  Widget _buildListItem(String title, String username, String devicename) {
+  // Device List Item Card
+  Widget _buildDeviceCard(String title, String username, String devicename, bool showButton) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Container(
-        width: 360,
-        height: 80,
-        padding: const EdgeInsets.only(left: 6.0, top: 4.0),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.blueGrey[300],
+          color: Colors.grey[300],
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment
-              .spaceBetween, // This will place items on both sides
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // Device Info
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
                 ),
-                SizedBox(height: 10),
-                Text(username),
-                Text(devicename),
+
+                const SizedBox(height: 5),
+                Text(username, style: const TextStyle(fontSize: 14, color: Colors.black)),
+                Text(devicename, style: const TextStyle(fontSize: 14, color: Colors.black)),
+
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: ElevatedButton(
+
+            // Register Device Button (Only for "New Device")
+            if (showButton)
+              ElevatedButton(
                 onPressed: () {
-                  // Add your button action here
+                  print("Register Device Pressed");
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                  backgroundColor: Colors.grey[500],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                 ),
-                child: Text(
+                child: const Text(
                   'Register Device',
-                  style: TextStyle(color: Colors.black),
-                ), // Customize the text of the button
+                  style: TextStyle(color: Colors.black, fontSize: 12),
+                ),
               ),
-            ),
           ],
         ),
       ),
