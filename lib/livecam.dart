@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 
 class LiveCamView extends StatefulWidget {
   const LiveCamView({super.key});
@@ -9,22 +9,22 @@ class LiveCamView extends StatefulWidget {
 }
 
 class _LiveCamViewState extends State<LiveCamView> {
-  late VideoPlayerController _controller;
+  late VlcPlayerController _vlcController;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset('assets/test_video.mp4')
-      ..initialize().then((_) {
-        setState(() {});
-        _controller.play(); // Auto-play the video
-        _controller.setLooping(true); // Loop the video
-      });
+    _vlcController = VlcPlayerController.network(
+      'http://192.168.1.22:8000/stream',
+      autoPlay: true,
+      hwAcc: HwAcc.full,
+      options: VlcPlayerOptions(),
+    );
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _vlcController.dispose();
     super.dispose();
   }
 
@@ -60,8 +60,7 @@ class _LiveCamViewState extends State<LiveCamView> {
                     ),
                   ),
                   child: const Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
+                    padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -85,16 +84,14 @@ class _LiveCamViewState extends State<LiveCamView> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           height: 250,
                           width: 300,
-                          child: _controller.value.isInitialized
-                              ? AspectRatio(
-                                  aspectRatio: _controller.value.aspectRatio,
-                                  child: VideoPlayer(_controller),
-                                )
-                              : const Center(
-                                  child: CircularProgressIndicator()),
+                          child: VlcPlayer(
+                            controller: _vlcController,
+                            aspectRatio: 16 / 9,
+                            placeholder: const Center(child: CircularProgressIndicator()),
+                          ),
                         ),
                         const SizedBox(height: 40),
                         const Row(
@@ -122,8 +119,7 @@ class _LiveCamViewState extends State<LiveCamView> {
                               ),
                               child: const Text(
                                 'Capture Report',
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.black),
+                                style: TextStyle(fontSize: 16, color: Colors.black),
                               ),
                             ),
                           ],
