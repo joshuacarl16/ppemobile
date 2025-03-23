@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'reportPage.dart';
 
 class ComplianceReportsScreen extends StatefulWidget {
   const ComplianceReportsScreen({super.key});
@@ -99,6 +100,12 @@ class _ComplianceReportsScreenState extends State<ComplianceReportsScreen> {
                       ),
                       onTap: () {
                         print("Report tapped");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ReportPage(),
+                          ),
+                        );
                       },
                     ),
                   );
