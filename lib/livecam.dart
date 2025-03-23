@@ -1,8 +1,5 @@
-// https://scontent.xx.fbcdn.net/v/t1.15752-9/466167738_1260234895096038_6301843406910092136_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=0024fc&_nc_ohc=IiWrRAdjcFIQ7kNvgEjFMfK&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD1gF3JV6SHe-Zq8w6kypOx8omEiddDLkN_5g6JSD4vvey6g&oe=6794D852
-
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/devicelist.dart';
-import 'package:flutter_application_1/homepage.dart';
+import 'package:video_player/video_player.dart';
 
 class LiveCamView extends StatefulWidget {
   const LiveCamView({super.key});
@@ -12,29 +9,49 @@ class LiveCamView extends StatefulWidget {
 }
 
 class _LiveCamViewState extends State<LiveCamView> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.asset('assets/test_video.mp4')
+      ..initialize().then((_) {
+        setState(() {});
+        _controller.play(); // Auto-play the video
+        _controller.setLooping(true); // Loop the video
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('LIVE CAM VIEW',
-              style: TextStyle(fontWeight: FontWeight.bold)),
-          backgroundColor: Colors.grey[400], // Customize AppBar color
-          centerTitle: true, // Center the title
+          title: const Text(
+            'LIVE CAM VIEW',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: Colors.grey[400],
+          centerTitle: true,
         ),
         backgroundColor: Colors.blueGrey[300],
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Back Button
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context); // Navigate to the previous screen
+                    Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[500],
@@ -42,9 +59,9 @@ class _LiveCamViewState extends State<LiveCamView> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 2.0),
+                  child: const Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -71,39 +88,39 @@ class _LiveCamViewState extends State<LiveCamView> {
                         Container(
                           height: 250,
                           width: 300,
-                          child: Image.asset(
-                            'assets/test2.png',
-                            fit: BoxFit.fill,
-                          ),
+                          child: _controller.value.isInitialized
+                              ? AspectRatio(
+                                  aspectRatio: _controller.value.aspectRatio,
+                                  child: VideoPlayer(_controller),
+                                )
+                              : const Center(
+                                  child: CircularProgressIndicator()),
                         ),
-                        SizedBox(height: 40),
-                        Row(
-                          children: [Text('Workers Found: \n' + '69')],
+                        const SizedBox(height: 40),
+                        const Row(
+                          children: [Text('Workers Found: \n69')],
                         ),
-                        SizedBox(height: 20),
-                        Row(
+                        const SizedBox(height: 20),
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('PPE Compliance: \n' + '69'),
-                            Text('PPE Noncompliance: \n' + '69')
+                            Text('PPE Compliance: \n69'),
+                            Text('PPE Noncompliance: \n69')
                           ],
                         ),
-                        SizedBox(height: 40),
+                        const SizedBox(height: 40),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             ElevatedButton(
-                              onPressed: () {
-                                // Navigator.pop(
-                                //     context); // Navigate to the previous screen
-                              },
+                              onPressed: () {},
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.grey[500],
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 'Capture Report',
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black),
