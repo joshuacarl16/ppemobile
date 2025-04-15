@@ -57,19 +57,22 @@ class _MainPageState extends State<MainPage> {
 
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-        
+
         if (data["registered"] == true) {
-          if (data["admin"] == true){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-          }
-          else {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserHomePage()));
+          if (data["admin"] == true) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          } else {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => UserHomePage()));
           }
         } else {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => WaitingRegisterPage()));
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => WaitingRegisterPage()));
         }
       } else if (response.statusCode == 404) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => QrPage()));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => QrPage()));
       } else {
         print("Error: ${response.statusCode}");
       }
@@ -129,7 +132,8 @@ class _MainPageState extends State<MainPage> {
                           ),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 20.0),
                           child: Text(
                             'Login',
                             style: TextStyle(fontSize: 16, color: Colors.black),

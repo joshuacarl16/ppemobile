@@ -57,25 +57,28 @@ class _UserHomePageState extends State<UserHomePage> {
       }
     }
   }
-  
+
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Welcome, $userName',
-              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
-            ),
-            const Text(
-              'Safety Officer',
-              style: TextStyle(color: Colors.black, fontSize: 14),
-            ),
-          ],
-        ),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Welcome, $userName',
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontSize: 16),
+              ),
+              const Text(
+                'Safety Officer',
+                style: TextStyle(color: Colors.black, fontSize: 14),
+              ),
+            ],
+          ),
           backgroundColor: Colors.grey[300],
           actions: [
             IconButton(
@@ -115,7 +118,8 @@ class _UserHomePageState extends State<UserHomePage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ComplianceReportsScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => ComplianceReportsScreen()),
                     );
                   },
                 ),
@@ -138,7 +142,10 @@ class _UserHomePageState extends State<UserHomePage> {
     );
   }
 
-  Widget _buildMenuButton({required IconData icon, required String label, required VoidCallback onTap}) {
+  Widget _buildMenuButton(
+      {required IconData icon,
+      required String label,
+      required VoidCallback onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -155,7 +162,10 @@ class _UserHomePageState extends State<UserHomePage> {
             const SizedBox(height: 5),
             Text(
               label,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.black),
             ),
           ],
         ),

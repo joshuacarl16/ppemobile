@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/api/firebase_api.dart';
+import 'package:flutter_application_1/firebase_options.dart';
 import 'package:flutter_application_1/mainpage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_application_1/notifpage.dart';
+import 'package:flutter_application_1/userHomePage.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
+    await FirebaseApi().initNotifications();
     print('Firebase initialized');
   } catch (e) {
     print('Error initializing Firebase: $e');
@@ -35,6 +42,10 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const MainPage(),
+      navigatorKey: navigatorKey,
+      routes: {
+        '/login_screen': (context) => const MainPage(),
+      },
     );
   }
 }
