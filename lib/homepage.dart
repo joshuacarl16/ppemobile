@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
       home: Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Welcome, ' + 'Neil' + '\nAdministrator User',
+              'Welcome, ' + '\nAdministrator User',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             backgroundColor: Colors.grey[400],
@@ -33,13 +33,13 @@ class _HomePageState extends State<HomePage> {
                   print('Notifications icon tapped');
                 },
               ),
-              IconButton(
-                icon:
-                    const Icon(Icons.settings_outlined), // Icon here
-                onPressed: () {
-                  print('Settings icon tapped');
-                },
-              ),
+              // IconButton(
+              //   icon:
+              //       const Icon(Icons.settings_outlined), // Icon here
+              //   onPressed: () {
+              //     print('Settings icon tapped');
+              //   },
+              // ),
             ],
           ),
           backgroundColor: Colors.blueGrey[300],
@@ -107,35 +107,35 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HistorScreen(),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      height: 130,
-                      width: 250,
-                      color: Colors.grey[400],
-                      child: const Column(
-                        children: [
-                          Icon(
-                            Icons.history,
-                            size: 100,
-                          ),
-                          Text(
-                            'History',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // const SizedBox(height: 20),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => HistorScreen(),
+                  //       ),
+                  //     );
+                  //   },
+                  //   child: Container(
+                  //     height: 130,
+                  //     width: 250,
+                  //     color: Colors.grey[400],
+                  //     child: const Column(
+                  //       children: [
+                  //         Icon(
+                  //           Icons.history,
+                  //           size: 100,
+                  //         ),
+                  //         Text(
+                  //           'History',
+                  //           style: TextStyle(
+                  //               fontWeight: FontWeight.bold, fontSize: 18),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {

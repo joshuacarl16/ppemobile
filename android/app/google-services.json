@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "262642453970",
+    "project_id": "ppe-visual-monitoring-system",
+    "storage_bucket": "ppe-visual-monitoring-system.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262642453970:android:7541b880a087f1e10c0c0b",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj9F7cjBJk2Wlkbn7MUBloMWOoKOjzys4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

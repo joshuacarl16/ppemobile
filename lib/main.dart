@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/homepage.dart';
 import 'package:flutter_application_1/mainpage.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await Firebase.initializeApp();
+    print('Firebase initialized');
+  } catch (e) {
+    print('Error initializing Firebase: $e');
+  }
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,20 +25,16 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData(
         scaffoldBackgroundColor: Colors.black,
         brightness: Brightness.dark,
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Colors.transparent,
           type: BottomNavigationBarType.fixed,
-          selectedLabelStyle: TextStyle(
-            fontSize: 12,
-          ),
-          unselectedLabelStyle: TextStyle(
-            fontSize: 12,
-          ),
+          selectedLabelStyle: TextStyle(fontSize: 12),
+          unselectedLabelStyle: TextStyle(fontSize: 12),
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.white54,
         ),
       ),
-      home: MainPage(),
+      home: const MainPage(),
     );
   }
 }

@@ -1,0 +1,5 @@
+-keep class org.videolan.** { *; }
+-dontwarn org.videolan.**
+-keep class dev.fluttercommunity.plus.device_info.** { *; }
+-keep class net.touchcapture.qr.flutterqrplus.** { *; }
+-keep class * extends android.app.Application { *; }
